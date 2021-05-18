@@ -12,52 +12,49 @@
 <h1>Challenge Pokemon php</h1>
 <form action="">
     <label for="">
-    <input type="text" name="search" placeholder="Write Pokemon Name or Id:"> <br>
-    <button>Search</button>
+        <input type="text" name="search" placeholder="Write Pokemon Name or Id:"> <br>
+        <button>Search</button>
     </label>
 </form>
 <div>
-<?php
+    <?php
 
-// i use if  statement to check if the value of the input is empty or not
-if (!empty($_GET["search"])){ // input value
-    $poke_url = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET["search"]); // merge the url with input value
-    $poke_json = file_get_contents($poke_url); // get data from the api
-    $poke_data = json_decode($poke_json, true);
+    // i use if  statement to check if the value of the input is empty or not
+    if (!empty($_GET["search"])) { // input value
+        $poke_url = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET["search"]); // merge the url with input value
+        $poke_json = file_get_contents($poke_url); // get data from the api
+        $poke_data = json_decode($poke_json, true);
 // api to get the name and the image of previous evolution
-    $poke_url2 = "https://pokeapi.co/api/v2/pokemon-species/" . urlencode($_GET["search"]);
-    $poke_json2 = file_get_contents($poke_url2); // get data from the api
-    $poke_data2 = json_decode($poke_json2, true);
-    $pre_evo = $poke_data2["evolves_from_species"];
+        $poke_url2 = "https://pokeapi.co/api/v2/pokemon-species/" . urlencode($_GET["search"]);
+        $poke_json2 = file_get_contents($poke_url2); // get data from the api
+        $poke_data2 = json_decode($poke_json2, true);
+        $pre_evo = $poke_data2["evolves_from_species"];
 // get the name and the id of pokemon
-    $poke_name = $poke_data["name"];
-    $poke_Id = $poke_data["id"];
+        $poke_name = $poke_data["name"];
+        $poke_Id = $poke_data["id"];
 // get the the pic of the pokemon
-    $poke_pic = $poke_data["sprites"]["front_default"]; // pic from front
-    $poke_pic2 = $poke_data["sprites"]["back_shiny"];// pic from back
+        $poke_pic = $poke_data["sprites"]["other"]["dream_world"]["front_default"]; // pic from front
 // get the pokemon moves
-    $poke_moves = $poke_data['moves'];
-    $poke_move1 = $poke_moves[0]['move']['name'];
-    $poke_move2 = $poke_moves[1]['move']['name'];
-    $poke_move3 = $poke_moves[2]['move']['name'];
-    $poke_move4 = $poke_moves[4]['move']['name'];
-    echo "<h3>Name of Pokemon: $poke_name </h3><br><p> ID: $poke_Id </p><br>";
-    echo "<img src='" . $poke_pic . "'>";
-    echo "<img src='" . $poke_pic2 . "'> <br>";
-    echo "Moves:<ul><li> $poke_move1 </li><li> $poke_move2 </li> <li> $poke_move3 </li><li> $poke_move4</li> </ul><br>";
+        $poke_moves = $poke_data['moves'];
+        $poke_move1 = $poke_moves[0]['move']['name'];
+        $poke_move2 = $poke_moves[1]['move']['name'];
+        $poke_move3 = $poke_moves[2]['move']['name'];
+        $poke_move4 = $poke_moves[4]['move']['name'];
+        echo "<h3>Name of Pokemon: $poke_name </h3><br><p> ID: $poke_Id </p><br>";
+        echo "<img src='" . $poke_pic . "'><br>";
+        echo "Moves:<ul><li> $poke_move1 </li><li> $poke_move2 </li> <li> $poke_move3 </li><li> $poke_move4</li> </ul><br>";
 // if statement to check if the pokemon has previous evolution
-    if (is_null($pre_evo)){
-        echo "This pokemon has no previous evolution";
-    } else {
-        echo "Previous Evolution:" . $pre_evo['name'];
+        if (is_null($pre_evo)) {
+            echo "This pokemon has no previous evolution";
+        } else {
+            echo "Previous Evolution:" . $pre_evo['name'];
+        }
+    } else if (empty($_GET["search"])) {
+        echo "<h3>You have to write a name or id !!!.</h3>";
     }
-} else if (empty($_GET["search"])){
-    echo "<h3>You have to write a name or id !!!.</h3>";
-}
 
 
-
-?>
+    ?>
 </div>
 </body>
 </html>
