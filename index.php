@@ -27,13 +27,11 @@ if (!empty($_GET["search"])){ // input value
     $poke_url2 = "https://pokeapi.co/api/v2/pokemon-species/" . urlencode($_GET["search"]);
     $poke_json2 = file_get_contents($poke_url2); // get data from the api
     $poke_data2 = json_decode($poke_json2, true);
-    $evo_name = $poke_data2["evolves_from_species"]["name"];
-
+    $pre_evo = $poke_data2["evolves_from_species"];
     // get the name and the id of pokemon
     $poke_name = $poke_data["name"];
     $poke_Id = $poke_data["id"];
-    $search = $_GET['search'];
-    echo "Name of Pokemon: {$poke_name} <br> ID: {$poke_Id} <br>";
+    echo "Name of Pokemon: $poke_name <br> ID: $poke_Id <br>";
     // get the the pic of the pokemon
     $poke_pic = $poke_data["sprites"]["front_default"]; // pic from front
     $poke_pic2 = $poke_data["sprites"]["back_shiny"];// pic from back
@@ -51,12 +49,11 @@ if (!empty($_GET["search"])){ // input value
     echo "<h3>You have to write a name or id !!!.</h3>";
 }
 // if statement to check if the pokemon has previous evolution
-if ($evo_name !== null){
-    echo "Previous Evolution: $evo_name";
-} else {
+if (is_null($pre_evo)){
     echo "This pokemon has no previous evolution";
+} else {
+    echo "Previous Evolution:" . $pre_evo['name'];
 }
-
 ?>
 
 </body>
