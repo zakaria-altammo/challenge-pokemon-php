@@ -34,15 +34,15 @@
         $poke_Id = $poke_data["id"];
 // get the the pic of the pokemon
         $poke_pic = $poke_data["sprites"]["other"]["dream_world"]["front_default"]; // pic from front
-// get the pokemon moves
-        $poke_moves = $poke_data['moves'];
-        $poke_move1 = $poke_moves[0]['move']['name'];
-        $poke_move2 = $poke_moves[1]['move']['name'];
-        $poke_move3 = $poke_moves[2]['move']['name'];
-        $poke_move4 = $poke_moves[4]['move']['name'];
+
+
         echo "<h3>Name of Pokemon: $poke_name </h3><br><p> ID: $poke_Id </p><br>";
         echo "<img src='" . $poke_pic . "'><br>";
-        echo "Moves:<ul><li> $poke_move1 </li><li> $poke_move2 </li> <li> $poke_move3 </li><li> $poke_move4</li> </ul><br>";
+        // get the pokemon moves using for loop 
+        $poke_moves = $poke_data["moves"];
+        for ($i = 0; $i < 5 && $i < count($poke_moves); $i++) {
+            echo "<p>" . $poke_moves[$i]['move']['name'] . "</p><br>";
+        }
 // if statement to check if the pokemon has previous evolution
         if (is_null($pre_evo)) {
             echo "This pokemon has no previous evolution";
