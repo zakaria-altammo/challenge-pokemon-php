@@ -12,16 +12,16 @@
 <h1>Challenge Pokemon php</h1>
 <form action="">
     <label for="">
-        <input type="text" name="search" placeholder="Write Pokemon Name or Id:"> <br>
+        <input type="text" name="search" placeholder="Write Pokemon Name or Id"> <br>
         <button>Search</button>
     </label>
 </form>
 <div>
     <?php
 
-    // i use if  statement to check if the value of the input is empty or not
-    if (!empty($_GET["search"])) { // input value
-        $poke_url = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET["search"]); // merge the url with input value
+// if  statement to check if the value of the input is empty or not
+    if (!empty($_GET["search"])) {
+        $poke_url = "https://pokeapi.co/api/v2/pokemon/" . urlencode($_GET["search"]); // add input value to url
         $poke_json = file_get_contents($poke_url); // get data from the api
         $poke_data = json_decode($poke_json, true);
 // api to get the name and the image of previous evolution
@@ -34,13 +34,17 @@
         $poke_Id = $poke_data["id"];
 // get the the pic of the pokemon
         $poke_pic = $poke_data["sprites"]["other"]["dream_world"]["front_default"]; // pic from front
-
-
+// get another pic of pokemon because some of pokemon doesn't have dream world pic
+        $poke_picAlt = $poke_data["sprites"]["front_default"];
         echo "<h3>Name of Pokemon: $poke_name </h3><br><p> ID: $poke_Id </p><br>";
-        echo "<img src='" . $poke_pic . "'><br>";
-        // get the pokemon moves using for loop 
+        echo "<img class='first' alt='poke Dream world pic' src='" . $poke_pic . "'><br>";
+        echo "<img class='second' alt='poke normal pic' src='" . $poke_picAlt. "'><br>";
+
+// get the pokemon moves using for loop
         $poke_moves = $poke_data["moves"];
+        echo "Moves: <br>";
         for ($i = 0; $i < 5 && $i < count($poke_moves); $i++) {
+
             echo "<p>" . $poke_moves[$i]['move']['name'] . "</p><br>";
         }
 // if statement to check if the pokemon has previous evolution

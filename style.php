@@ -26,7 +26,7 @@ color: #CBAC88;
 
 }
 div {
-padding: 10px;
+padding: 5px;
 width: 350px;
 background-color: #FCFFFC;
 color: #2D3A3A;
@@ -39,16 +39,20 @@ box-shadow: 0 0 15px black;
 
 }
 input {
-margin: 5px;
+padding-left: 5px;
+margin: 3px;
 width: 350px;
 height: 30px;
 box-shadow: 0 0 15px black;
 border: none;
+border-radius: 5px;
 
 }
 p {
 font-family: Andalus, sans-serif;
 font-size: 15px;
+margin-bottom: -1em;
+margin-top: 0em;
 }
 button {
 background-color: #CBAC88;
@@ -57,6 +61,7 @@ margin: 0 0 7px 0;
 height: 30px;
 border-radius: 5px;
 border: none;
+box-shadow: 0 0 10px black;
 
 }
 button:hover {
@@ -65,7 +70,11 @@ background-color: #2BA84A;
 button:active {
 transform: translateY(2px);
 }
-img {
+.first {
+width: 100px;
+height: 100px;
+}
+.second {
 width: 125px;
 height: 125px;
 }
