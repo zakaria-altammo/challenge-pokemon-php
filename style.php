@@ -15,15 +15,15 @@ body {
 text-align: center;
 background: url('DVMT.jpg');
 background-size: cover;
-
+font-family: 'Cutive Mono', monospace;
 
 }
 h1 {
 text-shadow: 0 0 15px black;
-font-family: sans-serif;
 color: #CBAC88;
-
-
+}
+h3 {
+text-transform: capitalize;
 }
 div {
 padding: 5px;
@@ -35,7 +35,7 @@ left: 465px;
 border-radius: 10px;
 font-weight: bolder;
 box-shadow: 0 0 15px black;
-
+opacity: 0.7;
 
 }
 input {
@@ -49,7 +49,6 @@ border-radius: 5px;
 
 }
 p {
-font-family: Andalus, sans-serif;
 font-size: 15px;
 margin-bottom: -1em;
 margin-top: 0em;
@@ -71,8 +70,8 @@ button:active {
 transform: translateY(2px);
 }
 .first {
-width: 100px;
-height: 100px;
+width: 80px;
+height: 80px;
 }
 .second {
 width: 125px;
